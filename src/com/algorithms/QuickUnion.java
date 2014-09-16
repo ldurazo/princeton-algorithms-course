@@ -2,17 +2,25 @@ package com.algorithms;
 
 public class QuickUnion {
     private int id[];
+    private int sz[];
+    private int count;
 
     public QuickUnion(int N) {
+        count = N;
         id = new int[N];
-        for(int i:id)
-            id[i]=i;
+        sz = new int[N];
+        for (int i = 0; i < N; i++) {
+            id[i] = i;
+            sz[i] = i;
+        }
     }
 
     //time proportional to depth of i
-    private int root(int i) {
-        while(i !=id[i])
-            i=id[i];
+    private int root(int i){
+        while (i != id[i]) {
+            id[i] = id[id[i]];
+            i = id[i];
+        }
         return i;
     }
 
@@ -21,11 +29,20 @@ public class QuickUnion {
         return root(p) == root(q);
     }
 
+    public int count() {
+        return count;
+    }
+
     //time proportional to both depth of q and p
     public void unite(int p, int q) {
-        int i = root(p);
-        int j = root(q);
-        id[i]=j;
+        int rootP = root(p);
+        int rootQ = root(q);
+        if (rootP == rootQ) return;
+
+        // this is not working
+        if   (sz[rootP] < sz[rootQ]) { id[rootP] = rootQ; sz[rootQ] += sz[rootP]; }
+        else                         { id[rootQ] = rootP; sz[rootP] += sz[rootQ]; }
+        count--;
     }
 
     @Override
@@ -34,6 +51,7 @@ public class QuickUnion {
         for (int i: id) {
             toStringArray.append(id[i]).append(" ");
         }
+        toStringArray.append(" count ").append(count);
         return toStringArray.toString();
     }
 }
