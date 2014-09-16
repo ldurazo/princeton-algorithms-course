@@ -27,4 +27,13 @@ public class QuickUnion {
         int j = root(q);
         id[i]=j;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder toStringArray = new StringBuilder();
+        for (int i: id) {
+            toStringArray.append(id[i]).append(" ");
+        }
+        return toStringArray.toString();
+    }
 }
