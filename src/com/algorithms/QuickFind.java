@@ -18,9 +18,17 @@ public class QuickFind {
     //N operations
     public void unite(int p, int q) {
         int pid=id[p];
-        for (int i = 0; i < id.length; i++) {
+        for (int i: id) {
             if(id[i]==pid) id[i]=id[q];
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder toStringArray = new StringBuilder();
+        for (int i: id) {
+            toStringArray.append(id[i]).append("\\s");
+        }
+        return toStringArray.toString();
+    }
 }
