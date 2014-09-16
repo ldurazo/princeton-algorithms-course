@@ -27,7 +27,7 @@ public class QuickFind {
     public String toString() {
         StringBuilder toStringArray = new StringBuilder();
         for (int i: id) {
-            toStringArray.append(id[i]).append("\\s");
+            toStringArray.append(id[i]).append(" ");
         }
         return toStringArray.toString();
     }
